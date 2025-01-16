@@ -12,7 +12,7 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
-let token = localStorage.getItem("token"); // Pobieranie tokenu z localStorage
+let token = localStorage.getItem("token");
 
 const posts = ref([]);
 const router = useRouter();
@@ -33,7 +33,7 @@ const openPost = (postId) => {
 // Sprawdzanie, czy token jest dostępny
 if (!token) {
   alert("Musisz się zalogować, aby przeglądać tę stronę.");
-  router.push("/login"); // Przekierowanie na stronę logowania
+  router.push("/login");
 }
 
 onMounted(() => {

@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <!-- Górna sekcja z logo i przyciskami -->
+<!-- Górna sekcja z logo i przyciskami -->
     <div class="top-section">
       <div class="logo">
         <img :src="logoGif" alt="Logo" class="logo-image" />
@@ -17,10 +17,10 @@
       </div>
     </div>
 
-    <!-- Nawigacja -->
+<!-- Nawigacja -->
     <Navbar class="navbar" />
 
-    <!-- Główna sekcja z treścią i czatem -->
+<!-- Główna sekcja z treścią i czatem -->
     <div class="main-container">
       <ClientOnly>
         <div class="content-and-chat">
@@ -30,12 +30,12 @@
       </ClientOnly>
     </div>
 
-    <!-- Sekcja reklamy -->
+<!-- Sekcja reklamy -->
     <div class="ad-section">
       <h3>Reklama</h3>
     </div>
 
-    <!-- Stopka -->
+<!-- Stopka -->
     <footer class="footer">
       <p>&copy; 2025 - NightMeets.eu</p>
     </footer>
@@ -86,14 +86,14 @@ onMounted(() => {
     script.crossOrigin = "anonymous";
     document.head.appendChild(script);
 
-    // Sprawdź status logowania
+// Sprawdź status logowania
     checkLoginStatus();
 
     window.addEventListener('storage', () => {
       checkLoginStatus();
     });
 
-    // Konfiguracja Socket.IO
+// Konfiguracja Socket.IO
     socket = io('http://localhost:3001', {
       transports: ['websocket', 'polling'],
     });

@@ -11,7 +11,7 @@ router.post('/add', verifyToken, verifyVerifiedUser, async (req, res) => {
     const { eventName, location, date, time, coordinates } = req.body;
     const createdBy = req.user.id;
 
-    // Utworzenie nowego wydarzenia
+// Utworzenie nowego wydarzenia
     const newMeetup = new Meetup({
       eventName,
       location,
@@ -23,7 +23,7 @@ router.post('/add', verifyToken, verifyVerifiedUser, async (req, res) => {
 
     const savedMeetup = await newMeetup.save();
 
-    // Automatyczne utworzenie posta na forum po dodaniu wydarzenia
+// Automatyczne utworzenie posta na forum po dodaniu wydarzenia
     const forumPost = new ForumPost({
       meetupId: savedMeetup._id,
       content: `Spotkanie ${eventName} zostało utworzone. Dołącz do wydarzenia i weź udział!`,

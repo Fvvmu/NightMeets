@@ -13,10 +13,10 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
   console.log('Użytkownik połączony z Socket.IO');
 
-  // Obsługa wiadomości z czatu
+// Obsługa wiadomości z czatu
   socket.on('chat message', (msg) => {
     console.log(`Wiadomość od ${msg.username}: ${msg.message}`);
-    io.emit('chat message', msg); // Emitowanie wiadomości do wszystkich podłączonych klientów
+    io.emit('chat message', msg);
   });
 
   socket.on('disconnect', () => {

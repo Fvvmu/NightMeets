@@ -5,7 +5,7 @@ import { GridFSBucket } from 'mongodb';
 import Comment from '../models/Comment.js';
 import Like from '../models/Like.js';
 import User from '../models/User.js';
-import jwt from 'jsonwebtoken'; // Importujemy jwt
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -26,14 +26,14 @@ const upload = multer({ storage });
 
 // Middleware do weryfikacji tokena
 const verifyToken = (req, res, next) => {
-  const token = req.header('Authorization')?.replace('Bearer ', ''); // Pobieramy token
+  const token = req.header('Authorization')?.replace('Bearer ', '');
 
   if (!token) {
     return res.status(401).json({ message: 'Access denied. No token provided.' });
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Użyj prawidłowego klucza
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = decoded.userId; 
     req.role = decoded.role; 
     next();
@@ -41,7 +41,6 @@ const verifyToken = (req, res, next) => {
     res.status(400).json({ message: 'Invalid token.' });
   }
 };
-
 
 // Middleware sprawdzający rolę
 const checkRole = (roles) => {

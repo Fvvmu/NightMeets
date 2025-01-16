@@ -8,9 +8,9 @@
 import axios from 'axios';
 import { ref, onMounted, nextTick } from 'vue';
 
-let map; // Globalna zmienna dla mapy
+let map;
 const markers = ref([]);
-const userRole = ref('user'); // Rola użytkownika (np. 'admin' lub 'user')
+const userRole = ref('user');
 
 onMounted(async () => {
   try {
@@ -30,10 +30,10 @@ onMounted(async () => {
       attribution: '&copy; OpenStreetMap contributors',
     }).addTo(map);
 
-    // Pobierz rolę użytkownika
+// Pobierz rolę użytkownika
     await fetchUserRole();
 
-    // Obsługa kliknięcia na mapie
+// Obsługa kliknięcia na mapie
     map.on('click', async (e) => {
       if (userRole.value === 'user') {
         alert('Tylko zweryfikowani użytkownicy mogą dodawać pinezki!');
@@ -42,7 +42,7 @@ onMounted(async () => {
 
       const { lat, lng } = e.latlng;
 
-      // Pobieranie danych od użytkownika
+// Pobieranie danych od użytkownika
       const title = prompt('Podaj nazwę lokalizacji:')?.trim();
       const place = prompt('Podaj miejsce spotkania:')?.trim();
       const organizer = prompt('Podaj nazwę organizatora:')?.trim();
@@ -75,7 +75,7 @@ onMounted(async () => {
 
         if (response.data) {
           alert('Pinezka została dodana.');
-          location.reload(); // Odśwież stronę po dodaniu pinezki
+          location.reload();
         }
       } catch (error) {
         console.error('Błąd podczas dodawania pinezki:', error.response?.data || error.message);
@@ -83,7 +83,7 @@ onMounted(async () => {
       }
     });
 
-    // Pobierz istniejące pinezki
+// Pobierz istniejące pinezki
     await fetchPins(L);
   } catch (error) {
     console.error('Błąd podczas inicjalizacji mapy:', error.message);
@@ -134,7 +134,7 @@ const addMarkerToMap = (marker, L) => {
       })
     : 'Brak daty';
 
-  // Tworzenie zawartości popupu
+// Tworzenie zawartości popupu
   const popupContent = document.createElement('div');
   popupContent.innerHTML = `
     <b>${marker.title}</b><br>
@@ -144,7 +144,7 @@ const addMarkerToMap = (marker, L) => {
     <b>Godzina:</b> ${marker.time || 'Brak godziny'}<br>
   `;
 
-  // Dodanie przycisku "Usuń" dla administratora
+// Dodanie przycisku "Usuń" dla administratora
   if (userRole.value === 'admin') {
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Usuń';
@@ -173,7 +173,7 @@ const deletePin = async (pinId, L) => {
       headers: { Authorization: `Bearer ${token}` },
     });
     alert('Pinezka została usunięta.');
-    location.reload(); // Odśwież stronę po usunięciu pinezki
+    location.reload();
   } catch (error) {
     console.error('Błąd podczas usuwania pinezki:', error.response?.data || error.message);
     alert('Nie udało się usunąć pinezki. Sprawdź swoje uprawnienia.');

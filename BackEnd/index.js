@@ -16,12 +16,11 @@ import path from 'path';
 import cron from 'node-cron';
 import ForumPost from './models/ForumPost.js';
 import Meetup from './models/Meetup.js';
-import Comment from './models/Comment.js'; // Import modelu dla komentarzy
-import Like from './models/Like.js'; // Import modelu dla polubień
+import Comment from './models/Comment.js';
+import Like from './models/Like.js';
 import jwt from 'jsonwebtoken';
 import { GridFSBucket } from 'mongodb';
 import { fileURLToPath } from "url";
-
 
 dotenv.config();
 
@@ -229,4 +228,3 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-

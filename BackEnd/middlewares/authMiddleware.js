@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 export const verifyToken = (req, res, next) => {
-  const token = req.header('Authorization')?.replace('Bearer ', '');  // Upewnij się, że token jest w formacie Bearer
+  const token = req.header('Authorization')?.replace('Bearer ', '');
 
   if (!token) {
     return res.status(401).json({ message: 'Dostęp zabroniony. Nie znaleziono tokena.' });

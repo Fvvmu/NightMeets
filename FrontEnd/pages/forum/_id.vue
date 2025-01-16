@@ -39,7 +39,7 @@ const newComment = ref('');
 const getDetail = (content, label) => {
   try {
     if (!content) return 'Nieznane';
-    const regex = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+)`, 'i'); // Wyszukiwanie z etykietą np. **Miejsce:**
+    const regex = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+)`, 'i');
     const match = content.match(regex);
     return match ? match[1].trim() : 'Nieznane';
   } catch {
@@ -52,7 +52,7 @@ const fetchPost = async () => {
   try {
     const response = await axios.get(`http://localhost:5000/api/forum/posts/${route.params.id}`);
     console.log("Pobrano dane posta:", response.data);
-    post.value = response.data.post || {}; // Bezpieczne przypisanie pustego obiektu
+    post.value = response.data.post || {};
   } catch (error) {
     console.error('Błąd podczas pobierania posta:', error);
   }
@@ -63,7 +63,7 @@ const fetchComments = async () => {
   try {
     const response = await axios.get(`http://localhost:5000/api/forum/posts/${route.params.id}/comments`);
     console.log("Pobrano komentarze:", response.data);
-    comments.value = response.data.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)); // Sortowanie po dacie
+    comments.value = response.data.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
   } catch (error) {
     console.error('Błąd podczas pobierania komentarzy:', error);
   }

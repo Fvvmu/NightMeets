@@ -76,13 +76,12 @@ const updateUser = async () => {
 
     alert('Dane zostały zaktualizowane. Zaloguj się ponownie.');
 
-    // Wyczyszczenie danych lokalnych
     localStorage.clear();
 
-    // Przekierowanie do logowania
     router.push('/login').then(() => {
-      // Po przekierowaniu odśwież stronę
-      location.reload();
+
+    location.reload();
+
     });
   } catch (error) {
     console.error('Błąd podczas aktualizacji danych:', error.response?.data || error.message);

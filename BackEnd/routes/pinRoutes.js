@@ -1,6 +1,6 @@
 import express from 'express';
 import Pin from '../models/Pin.js';
-import ForumPost from '../models/ForumPost.js'; // Import modelu ForumPost
+import ForumPost from '../models/ForumPost.js';
 import { verifyToken, verifyAdmin, verifyVerifiedUser } from '../middlewares/auth.js';
 
 const router = express.Router();
@@ -33,7 +33,7 @@ router.post('/', verifyToken, verifyVerifiedUser, async (req, res) => {
       title: `Nowe spotkanie: ${title}`,
       content: `Dodano nowe spotkanie na mapie!\n\n**Miejsce:** ${place}\n**Organizator:** ${organizer}\n**Data:** ${date}\n**Godzina:** ${time}\n\nZapraszamy wszystkich zainteresowanych!`,
       user: req.user.id,
-      pin: newPin._id, // Powiązanie postu z pinezką
+      pin: newPin._id,
     });
 
     await newPost.save();
@@ -45,7 +45,7 @@ router.post('/', verifyToken, verifyVerifiedUser, async (req, res) => {
   }
 });
 
-// Pobieranie wszystkich pinezek (ogólnodostępne)
+// Pobieranie wszystkich pinezek (dla każdego)
 router.get('/', async (req, res) => {
   try {
     const pins = await Pin.find();
@@ -60,14 +60,14 @@ router.delete('/:id', verifyToken, verifyAdmin, async (req, res) => {
   try {
     const pinId = req.params.id;
 
-    // Usunięcie pinezki
+// Usunięcie pinezki
     const deletedPin = await Pin.findByIdAndDelete(pinId);
 
     if (!deletedPin) {
       return res.status(404).json({ message: 'Pinezka nie została znaleziona.' });
     }
 
-    // Usunięcie powiązanego postu na forum
+// Usunięcie powiązanego postu na forum
     await ForumPost.findOneAndDelete({ pin: pinId });
 
     res.status(200).json({ message: 'Pinezka i powiązany post zostały usunięte.' });
