@@ -10,7 +10,7 @@ router.post('/send-email', async (req, res) => {
   const { name, email, message } = req.body;
 
   try {
-    // Konfiguracja transportera Nodemailer dla Gmaila
+// Konfiguracja transportera Nodemailer dla Gmaila
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -19,7 +19,7 @@ router.post('/send-email', async (req, res) => {
       },
     });
 
-    // Konfiguracja wiadomości
+// Konfiguracja wiadomości
     const mailOptions = {
       from: `${name} <${email}>`,
       to: process.env.RECEIVER_EMAIL,
@@ -31,8 +31,8 @@ router.post('/send-email', async (req, res) => {
       `,
       replyTo: email,
     };
-
-    // Wysłanie wiadomości
+    
+// Wysłanie wiadomości
     await transporter.sendMail(mailOptions);
     res.status(200).json({ message: 'Wiadomość została wysłana pomyślnie!' });
   } catch (error) {
