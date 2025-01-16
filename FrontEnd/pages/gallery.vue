@@ -11,7 +11,6 @@
       </div>
     </div>
 
-    <!-- Modal -->
     <div v-if="selectedImage" class="modal">
       <div class="modal-content">
         <button class="close" @click="closeImageModal">×</button>
@@ -24,15 +23,15 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import { useRouter } from "vue-router"; // Import routera
+import { useRouter } from "vue-router";
 
-const router = useRouter(); // Inicjalizowanie routera
+const router = useRouter();
 
 const images = ref([]);
 const newImage = ref(null);
 const selectedImage = ref(null);
 const newComment = ref("");
-let token = localStorage.getItem("token"); // Pobieranie tokenu z localStorage
+let token = localStorage.getItem("token");
 
 // Dekodowanie tokena, aby uzyskać userId
 const decodedToken = token ? JSON.parse(atob(token.split('.')[1])) : null;
