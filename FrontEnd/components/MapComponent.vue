@@ -24,7 +24,7 @@ onMounted(async () => {
 
     const L = await import('leaflet');
 
-    // Inicjalizacja mapy
+// Inicjalizacja mapy
     map = L.map('map').setView([52.00, 19.012229], 6);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',

@@ -29,7 +29,7 @@ const verifyToken = (req, res, next) => {
   const token = req.header('Authorization')?.replace('Bearer ', '');
 
   if (!token) {
-    return res.status(401).json({ message: 'Access denied. No token provided.' });
+    return res.status(401).json({ message: 'Dostęp zabroniony. Nie podano tokena.' });
   }
 
   try {
@@ -38,7 +38,7 @@ const verifyToken = (req, res, next) => {
     req.role = decoded.role; 
     next();
   } catch (error) {
-    res.status(400).json({ message: 'Invalid token.' });
+    res.status(400).json({ message: 'Zły token.' });
   }
 };
 
@@ -46,7 +46,7 @@ const verifyToken = (req, res, next) => {
 const checkRole = (roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.role)) {
-      return res.status(403).json({ message: 'Access denied. You do not have the required role.' });
+      return res.status(403).json({ message: 'Dostęp zablokowany. Nie masz odpowiedniej roli.' });
     }
     next();
   };
