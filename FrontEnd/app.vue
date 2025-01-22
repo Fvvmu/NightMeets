@@ -228,7 +228,7 @@ button {
   
     .content-container {
       flex: 3;
-      background-color: #121212;
+      background-color: #1a1a1a;
       border-radius: 8px;
       padding: 20px;
 
